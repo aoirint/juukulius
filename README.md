@@ -11,5 +11,7 @@ dataディレクトリに音声ファイル`a.wav`を配置して、以下のコ
 標準出力に文字起こし結果が出力される。
 
 ```shell
-make run O=/data/a.wav
+make build
+
+./recognize /data/a.wav
 ```
