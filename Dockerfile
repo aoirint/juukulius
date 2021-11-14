@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1.3-labs
-FROM ubuntu:focal
+ARG BASE_IMAGE=python:3.9
+FROM $BASE_IMAGE
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN <<EOF
@@ -22,4 +23,10 @@ RUN <<EOF
     git checkout "${JULIUS_VERSION}"
 EOF
 
-WORKDIR /opt/julius
+ENV JULIUS_DICTATION_KIT_ROOT=/opt/julius
+
+ADD src /opt/juukulius
+
+WORKDIR /opt/juukulius
+
+ENTRYPOINT [ "python3", "main.py" ]
