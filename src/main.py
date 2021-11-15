@@ -43,7 +43,7 @@ if __name__ == '__main__':
             cmd,
             cwd=JULIUS_DICTATION_KIT_ROOT,
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            # stderr=subprocess.PIPE,
             encoding='utf-8',
         )
 
@@ -53,9 +53,11 @@ if __name__ == '__main__':
 
             if verbose:
                 sys.stdout.write(line)
+                sys.stdout.flush()
 
-                errline = proc.stderr.readline()
-                sys.stderr.write(errline)
+                # errline = proc.stderr.readline()
+                # sys.stderr.write(errline)
+                # sys.stderr.flush()
 
             m = pat.match(line)
             if m:
