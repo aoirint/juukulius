@@ -16,24 +16,31 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('wavfile', type=str)
+    parser.add_argument('-cutsilence', action='store_true')
     parser.add_argument('-v', '--verbose', action='store_true')
     args = parser.parse_args()
 
     wavfile = args.wavfile
+    cutsilence = args.cutsilence
     verbose = args.verbose
 
     with tempfile.NamedTemporaryFile(mode='w') as fp:
         fp.write(wavfile)
         fp.flush()
 
+        cmd = [
+            JULIUS_DICTATION_KIT_PATH,
+            '-input',
+            'file',
+            '-filelist',
+            fp.name,
+        ]
+
+        if cutsilence:
+            cmd += [ '-cutsilence' ]
+
         proc = subprocess.Popen(
-            [
-                JULIUS_DICTATION_KIT_PATH,
-                '-input',
-                'file',
-                '-filelist',
-                fp.name,
-            ],
+            cmd,
             cwd=JULIUS_DICTATION_KIT_ROOT,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
