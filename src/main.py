@@ -16,9 +16,11 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('wavfile', type=str)
+    parser.add_argument('-v', '--verbose', action='store_true')
     args = parser.parse_args()
 
     wavfile = args.wavfile
+    verbose = args.verbose
 
     with tempfile.NamedTemporaryFile(mode='w') as fp:
         fp.write(wavfile)
@@ -41,7 +43,12 @@ if __name__ == '__main__':
         pat = re.compile(r'^sentence.*:\s*(.*)$')
         while True:
             line = proc.stdout.readline()
-            # sys.stdout.write(line)
+
+            if verbose:
+                sys.stdout.write(line)
+
+                errline = proc.stderr.readline()
+                sys.stderr.write(errline)
 
             m = pat.match(line)
             if m:
