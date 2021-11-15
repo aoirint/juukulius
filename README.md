@@ -24,7 +24,7 @@ ffmpeg -i original.mp3 -ac 1 -ar 16000 a.wav
 ```shell
 make build
 
-./recognize /data/a.wav
+./recognize /data/a.wav -cutsilence
 ```
 
 標準出力に文字起こし結果が出力される。
