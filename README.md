@@ -14,10 +14,10 @@ ffmpeg -i original.mp3 -ac 1 -ar 16000 a.wav
 
 `./data`ディレクトリに音声ファイル`a.wav`を配置して、以下のコマンドを実行。
 
-標準出力に文字起こし結果が出力される。
-
 ```shell
 make build
 
 ./recognize /data/a.wav
 ```
+
+標準出力に文字起こし結果が出力される。
