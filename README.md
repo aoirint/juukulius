@@ -6,7 +6,14 @@ Julius / Japanese Dictation Kitのラッパー（予定）
 - Japanese Dictation Kit: <https://github.com/julius-speech/dictation-kit>
 
 ## 日本語音声ファイルの文字起こし
-音声ファイルをwav形式・モノラル・16000Hzに変換する。
+
+音声を録音する。
+
+```shell
+ffmpeg -f pulse -i default -ac 1 -ar 16000 a.wav
+```
+
+または、音声ファイルをwav形式・モノラル・16000Hzに変換する。
 
 ```shell
 ffmpeg -i original.mp3 -ac 1 -ar 16000 a.wav
